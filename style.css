@@ -1,0 +1,19 @@
+body { background: #1a1a1a; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+
+.game-container { position: relative; width: 300px; }
+
+.char-img { width: 100%; display: block; }
+
+/* Hitbox kepala (atur top/left sesuai posisi gambar) */
+.head-hitbox {
+    position: absolute;
+    top: 5%;    /* Sesuaikan biar pas di kepala */
+    left: 30%;  /* Sesuaikan biar pas di kepala */
+    width: 40%; /* Lebar area kepala */
+    height: 30%; /* Tinggi area kepala */
+    cursor: pointer;
+    background: rgba(255, 0, 0, 0.0); /* Ubah jadi 0.2 buat testing, lalu 0 kalau sudah pas */
+    border-radius: 50%;
+}
+
+.score { color: white; text-align: center; font-size: 20px; font-family: sans-serif; margin-top: 10px; }
