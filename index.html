@@ -1,24 +1,1168 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klik Kepala!</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GTFS Dark Boss Raid</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    user-select:none;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    overflow-x:hidden;
+    font-family:Arial,sans-serif;
+    color:white;
+    text-align:center;
+    background:
+        radial-gradient(circle at 50% 20%,#52127d,transparent 35%),
+        radial-gradient(circle at 20% 80%,#21072f,transparent 35%),
+        #07050d;
+}
+
+.container{
+    width:94%;
+    max-width:900px;
+    margin:auto;
+    padding:25px 0 50px;
+}
+
+.logo{
+    font-size:13px;
+    letter-spacing:6px;
+    color:#dca7ff;
+    font-weight:bold;
+}
+
+h1{
+    margin:8px 0 4px;
+    font-size:clamp(32px,8vw,58px);
+    text-shadow:0 0 30px #a832ff;
+}
+
+.subtitle{
+    color:#ad9ab9;
+    margin-top:0;
+}
+
+/* PANEL */
+
+.panel{
+    margin-top:20px;
+    padding:18px;
+    border-radius:25px;
+    border:1px solid #693b86;
+    background:rgba(12,7,20,.92);
+    box-shadow:0 0 70px rgba(140,40,210,.18);
+}
+
+/* PHASE */
+
+.phase{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:2px;
+    background:#321342;
+    border:1px solid #9b4dcc;
+    margin-bottom:15px;
+}
+
+.phase.enrage{
+    background:#5b101c;
+    border-color:#ff335d;
+    color:#ff9aac;
+    box-shadow:0 0 25px rgba(255,30,80,.5);
+    animation:enragePulse .6s infinite alternate;
+}
+
+@keyframes enragePulse{
+    to{
+        box-shadow:0 0 35px rgba(255,30,80,.9);
+    }
+}
+
+/* STATS */
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:35px;
+    flex-wrap:wrap;
+}
+
+.stat b{
+    display:block;
+    font-size:25px;
+}
+
+.stat span{
+    font-size:10px;
+    color:#93809d;
+    letter-spacing:2px;
+}
+
+/* HP */
+
+.hp-container{
+    max-width:720px;
+    margin:20px auto 10px;
+}
+
+.hp-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:7px;
+    font-size:12px;
+    color:#cbb9d4;
+}
+
+.hp-bg{
+    height:24px;
+    border-radius:20px;
+    overflow:hidden;
+    background:#140a1d;
+    border:1px solid #543066;
+}
+
+.hp{
+    height:100%;
+    width:100%;
+    background:linear-gradient(
+        90deg,
+        #6819a0,
+        #a832e8,
+        #e1a1ff
+    );
+    box-shadow:0 0 25px #a832ff;
+    transition:width .3s ease;
+}
+
+.hp.enrage{
+    background:linear-gradient(
+        90deg,
+        #9d101f,
+        #ff244f,
+        #ff8a9d
+    );
+    box-shadow:0 0 30px #ff244f;
+}
+
+/* ARENA */
+
+.arena{
+    position:relative;
+    height:510px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* MAGIC CIRCLE */
+
+.magic{
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    border:2px solid rgba(181,68,255,.3);
+    box-shadow:
+        0 0 30px rgba(177,50,255,.4),
+        inset 0 0 50px rgba(177,50,255,.15);
+    animation:rotate 12s linear infinite;
+}
+
+.magic:before,
+.magic:after{
+    content:"";
+    position:absolute;
+    inset:35px;
+    border-radius:50%;
+    border:1px dashed rgba(212,137,255,.4);
+}
+
+.magic:after{
+    inset:75px;
+    border:2px solid rgba(193,82,255,.25);
+}
+
+@keyframes rotate{
+    from{transform:rotate(0)}
+    to{transform:rotate(360deg)}
+}
+
+/* BOSS */
+
+.boss{
+    position:relative;
+    z-index:3;
+    width:min(390px,82vw);
+    max-height:470px;
+    object-fit:contain;
+    cursor:pointer;
+    filter:drop-shadow(0 0 28px rgba(188,65,255,.7));
+    transition:filter .2s;
+}
+
+/* IDLE */
+
+.boss.idle{
+    animation:idle 2.5s ease-in-out infinite;
+}
+
+@keyframes idle{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+/* HIT */
+
+.boss.hit{
+    animation:none;
+    transform:scale(.9) rotate(-3deg);
+    filter:
+        brightness(1.8)
+        drop-shadow(0 0 35px #d76aff);
+}
+
+/* ENRAGE */
+
+.boss.enrage{
+    filter:
+        brightness(1.15)
+        saturate(1.5)
+        drop-shadow(0 0 35px #ff2457);
+    animation:
+        enrageIdle .7s infinite alternate;
+}
+
+@keyframes enrageIdle{
+    from{
+        transform:translateY(0) scale(1);
+    }
+    to{
+        transform:translateY(-8px) scale(1.03);
+    }
+}
+
+/* SCREEN SHAKE */
+
+.shake{
+    animation:shake .25s;
+}
+
+@keyframes shake{
+    0%{transform:translate(0)}
+    25%{transform:translate(7px,-4px)}
+    50%{transform:translate(-7px,4px)}
+    75%{transform:translate(4px,3px)}
+    100%{transform:translate(0)}
+}
+
+/* DAMAGE */
+
+.damage{
+    position:absolute;
+    z-index:10;
+    pointer-events:none;
+    font-size:26px;
+    font-weight:900;
+    color:#e7b7ff;
+    text-shadow:0 0 12px #bd38ff;
+    animation:damageUp .8s forwards;
+}
+
+.damage.critical{
+    color:#fff;
+    font-size:34px;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 25px #ff38db;
+}
+
+@keyframes damageUp{
+    from{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    to{
+        opacity:0;
+        transform:translateY(-90px) scale(1.2);
+    }
+}
+
+/* BOSS ATTACK */
+
+.attack-warning{
+    position:absolute;
+    z-index:8;
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    border:4px solid #ff315d;
+    box-shadow:0 0 30px #ff1748;
+    animation:warning .8s forwards;
+    pointer-events:none;
+}
+
+@keyframes warning{
+    from{
+        opacity:1;
+        transform:scale(.3);
+    }
+    to{
+        opacity:0;
+        transform:scale(1.5);
+    }
+}
+
+/* MESSAGE */
+
+.message{
+    min-height:25px;
+    margin:0 0 10px;
+    color:#c7b0d1;
+    font-size:13px;
+}
+
+/* BUTTON */
+
+button{
+    border:0;
+    border-radius:14px;
+    padding:13px 25px;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(135deg,#681aa0,#a936ee);
+    box-shadow:0 8px 25px rgba(150,50,230,.3);
+}
+
+button:hover{
+    filter:brightness(1.15);
+}
+
+button:active{
+    transform:scale(.96);
+}
+
+/* REWARD */
+
+.reward{
+    display:none;
+    margin-top:20px;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid #b84cff;
+    background:rgba(100,25,140,.2);
+    animation:rewardIn .7s;
+}
+
+@keyframes rewardIn{
+    from{
+        opacity:0;
+        transform:scale(.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.reward h2{
+    font-size:30px;
+}
+
+.code{
+    margin:15px;
+    font-size:28px;
+    letter-spacing:5px;
+    font-weight:bold;
+    color:#e4b2ff;
+    text-shadow:0 0 15px #b63cff;
+}
+
+footer{
+    margin-top:20px;
+    color:#62566c;
+    font-size:11px;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="game-container">
-        <!-- Karakter -->
-        <img src="karakter.png" alt="Karakter" class="char-img" id="character">
-        
-        <!-- Area Klik (Hitbox) -->
-        <div class="head-hitbox" id="headClick"></div>
-        
-        <!-- Counter -->
-        <p class="score">Skor: <span id="counter">0</span></p>
+<div class="container">
+
+    <div class="logo">GTFS EVENT</div>
+
+    <h1>🌑 DARK BOSS RAID</h1>
+
+    <p class="subtitle">
+        Kalahkan Dark melalui 3 fase!
+    </p>
+
+    <div class="panel">
+
+        <!-- PHASE -->
+        <div class="phase" id="phase">
+            PHASE 1
+        </div>
+
+        <!-- STATS -->
+        <div class="stats">
+
+            <div class="stat">
+                <b id="hits">0</b>
+                <span>HITS</span>
+            </div>
+
+            <div class="stat">
+                <b id="damage">0</b>
+                <span>DAMAGE</span>
+            </div>
+
+            <div class="stat">
+                <b id="timer">00:00</b>
+                <span>TIME</span>
+            </div>
+
+            <div class="stat">
+                <b id="status">ALIVE</b>
+                <span>STATUS</span>
+            </div>
+
+        </div>
+
+        <!-- HP -->
+        <div class="hp-container">
+
+            <div class="hp-info">
+                <span>🌑 DARK</span>
+                <span id="hpText">100%</span>
+            </div>
+
+            <div class="hp-bg">
+                <div class="hp" id="hp"></div>
+            </div>
+
+        </div>
+
+        <!-- MESSAGE -->
+        <div class="message" id="message">
+            Dark sedang menunggu...
+        </div>
+
+        <!-- ARENA -->
+        <div class="arena" id="arena">
+
+            <div class="magic"></div>
+
+            <!-- GAMBAR BOSS -->
+            <img
+                src="dark.png"
+                class="boss idle"
+                id="boss"
+                alt="Dark Boss"
+            >
+
+        </div>
+
+        <p class="message">
+            ⚔️ TAP / CLICK DARK UNTUK MENYERANG
+        </p>
+
+        <button onclick="resetRaid()">
+            🔄 RESET RAID
+        </button>
+
+        <!-- REWARD -->
+        <div class="reward" id="reward">
+
+            <h2>🎉 DARK DEFEATED!</h2>
+
+            <p>
+                Kamu berhasil melewati semua phase!
+            </p>
+
+            <div class="code">
+                DARK2026
+            </div>
+
+            <small>
+                Redeem code reward GTFS
+            </small>
+
+        </div>
+
     </div>
 
-    <script src="script.js"></script>
+    <footer>
+        GTFS • Dark Boss Raid • Mini Event
+    </footer>
+
+</div>
+
+
+<script>
+
+/* =========================
+   VARIABLES
+========================= */
+
+let hp = 100;
+let hits = 0;
+let totalDamage = 0;
+
+let phase = 1;
+
+let startTime = null;
+let timerInterval = null;
+
+let attackInterval = null;
+
+let defeated = false;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const boss =
+    document.getElementById("boss");
+
+const hpBar =
+    document.getElementById("hp");
+
+const hpText =
+    document.getElementById("hpText");
+
+const hitsText =
+    document.getElementById("hits");
+
+const damageText =
+    document.getElementById("damage");
+
+const timerText =
+    document.getElementById("timer");
+
+const statusText =
+    document.getElementById("status");
+
+const phaseText =
+    document.getElementById("phase");
+
+const message =
+    document.getElementById("message");
+
+const arena =
+    document.getElementById("arena");
+
+const reward =
+    document.getElementById("reward");
+
+
+/* =========================
+   START TIMER
+========================= */
+
+function startTimer(){
+
+    if(startTime !== null)
+        return;
+
+    startTime = Date.now();
+
+    timerInterval =
+        setInterval(() => {
+
+            const seconds =
+                Math.floor(
+                    (Date.now() - startTime) / 1000
+                );
+
+            const min =
+                String(Math.floor(seconds / 60))
+                .padStart(2,"0");
+
+            const sec =
+                String(seconds % 60)
+                .padStart(2,"0");
+
+            timerText.textContent =
+                min + ":" + sec;
+
+        },1000);
+}
+
+
+/* =========================
+   PLAYER ATTACK
+========================= */
+
+boss.addEventListener("click", attack);
+
+function attack(event){
+
+    if(defeated)
+        return;
+
+    startTimer();
+
+    /*
+       DAMAGE
+       Phase 1 : 5-10
+       Phase 2 : 7-14
+       Enrage : 10-20
+    */
+
+    let minDamage = 5;
+    let maxDamage = 10;
+
+    if(phase === 2){
+        minDamage = 7;
+        maxDamage = 14;
+    }
+
+    if(phase === 3){
+        minDamage = 10;
+        maxDamage = 20;
+    }
+
+    let damage =
+        Math.floor(
+            Math.random() *
+            (maxDamage - minDamage + 1)
+        ) + minDamage;
+
+
+    /* CRITICAL HIT */
+
+    const critical =
+        Math.random() < 0.12;
+
+    if(critical){
+        damage *= 2;
+    }
+
+
+    hp -= damage;
+
+    if(hp < 0)
+        hp = 0;
+
+
+    hits++;
+
+    totalDamage += damage;
+
+
+    /* UPDATE */
+
+    hpBar.style.width =
+        hp + "%";
+
+    hpText.textContent =
+        hp + "%";
+
+    hitsText.textContent =
+        hits;
+
+    damageText.textContent =
+        totalDamage;
+
+
+    /* HIT EFFECT */
+
+    boss.classList.remove("idle");
+
+    boss.classList.add("hit");
+
+    setTimeout(() => {
+
+        boss.classList.remove("hit");
+
+        if(!defeated){
+
+            if(phase === 3)
+                boss.classList.add("enrage");
+            else
+                boss.classList.add("idle");
+
+        }
+
+    },120);
+
+
+    /* SCREEN SHAKE */
+
+    document.body.classList.remove("shake");
+
+    void document.body.offsetWidth;
+
+    document.body.classList.add("shake");
+
+
+    /* DAMAGE TEXT */
+
+    createDamageText(
+        event,
+        damage,
+        critical
+    );
+
+
+    /* CHECK PHASE */
+
+    checkPhase();
+
+
+    /* DEFEAT */
+
+    if(hp <= 0){
+
+        defeatBoss();
+
+    }
+
+}
+
+
+/* =========================
+   DAMAGE POPUP
+========================= */
+
+function createDamageText(
+    event,
+    damage,
+    critical
+){
+
+    const popup =
+        document.createElement("div");
+
+    popup.className =
+        "damage";
+
+    if(critical)
+        popup.classList.add("critical");
+
+    popup.textContent =
+        critical
+        ? "CRITICAL -" + damage
+        : "-" + damage;
+
+
+    const rect =
+        arena.getBoundingClientRect();
+
+
+    let x =
+        event.clientX - rect.left;
+
+    let y =
+        event.clientY - rect.top;
+
+
+    x = Math.max(
+        20,
+        Math.min(
+            rect.width - 120,
+            x
+        )
+    );
+
+    y = Math.max(
+        50,
+        Math.min(
+            rect.height - 80,
+            y
+        )
+    );
+
+
+    popup.style.left =
+        x + "px";
+
+    popup.style.top =
+        y + "px";
+
+
+    arena.appendChild(popup);
+
+
+    setTimeout(() => {
+        popup.remove();
+    },800);
+}
+
+
+/* =========================
+   PHASE SYSTEM
+========================= */
+
+function checkPhase(){
+
+    /*
+      PHASE 1
+      100% - 61%
+
+      PHASE 2
+      60% - 21%
+
+      ENRAGE
+      20% - 0%
+    */
+
+
+    if(hp <= 60 && hp > 20 && phase === 1){
+
+        phase = 2;
+
+        phaseText.textContent =
+            "⚡ PHASE 2";
+
+        message.textContent =
+            "Dark mulai serius! Serangannya semakin kuat!";
+
+        phaseText.style.background =
+            "#45205c";
+
+        phaseText.style.borderColor =
+            "#b852ff";
+
+        startBossAttack();
+
+    }
+
+
+    if(hp <= 20 && hp > 0 && phase === 2){
+
+        phase = 3;
+
+        phaseText.textContent =
+            "☠️ ENRAGE";
+
+        phaseText.classList.add("enrage");
+
+        hpBar.classList.add("enrage");
+
+        boss.classList.remove("idle");
+
+        boss.classList.add("enrage");
+
+        message.textContent =
+            "☠️ DARK MEMASUKI ENRAGE MODE!";
+
+        statusText.textContent =
+            "ENRAGED";
+
+        startBossAttack(true);
+
+    }
+
+}
+
+
+/* =========================
+   BOSS ATTACK
+========================= */
+
+function startBossAttack(enrage = false){
+
+    clearInterval(attackInterval);
+
+
+    /*
+       Phase 2:
+       setiap 4 detik
+
+       Enrage:
+       setiap 2 detik
+    */
+
+    const speed =
+        enrage ? 2000 : 4000;
+
+
+    attackInterval =
+        setInterval(() => {
+
+            if(defeated)
+                return;
+
+            bossAttack();
+
+        },speed);
+
+}
+
+
+/* =========================
+   BOSS ATTACK EFFECT
+========================= */
+
+function bossAttack(){
+
+    const warning =
+        document.createElement("div");
+
+    warning.className =
+        "attack-warning";
+
+
+    const rect =
+        arena.getBoundingClientRect();
+
+
+    warning.style.left =
+        (rect.width / 2 - 85) + "px";
+
+    warning.style.top =
+        (rect.height / 2 - 85) + "px";
+
+
+    arena.appendChild(warning);
+
+
+    message.textContent =
+        "⚠️ DARK SEDANG MENYERANG!";
+
+
+    setTimeout(() => {
+
+        warning.remove();
+
+        if(!defeated){
+
+            message.textContent =
+                phase === 3
+                ? "☠️ ENRAGE! Jangan berhenti menyerang!"
+                : "⚔️ Serang Dark!";
+
+        }
+
+    },800);
+
+}
+
+
+/* =========================
+   DEFEAT
+========================= */
+
+function defeatBoss(){
+
+    defeated = true;
+
+    clearInterval(attackInterval);
+
+    clearInterval(timerInterval);
+
+
+    hp = 0;
+
+    hpBar.style.width =
+        "0%";
+
+    hpText.textContent =
+        "0%";
+
+
+    statusText.textContent =
+        "DEFEATED";
+
+
+    phaseText.textContent =
+        "👑 DEFEATED";
+
+
+    phaseText.classList.remove(
+        "enrage"
+    );
+
+
+    boss.classList.remove(
+        "idle",
+        "enrage"
+    );
+
+
+    boss.style.filter =
+        "grayscale(1) brightness(.45)";
+
+
+    message.textContent =
+        "🎉 Dark telah dikalahkan!";
+
+
+    reward.style.display =
+        "block";
+
+
+    /* Confetti sederhana */
+
+    for(let i=0;i<30;i++){
+
+        const star =
+            document.createElement("div");
+
+        star.textContent =
+            "✦";
+
+        star.style.position =
+            "fixed";
+
+        star.style.left =
+            Math.random()*100 + "%";
+
+        star.style.top =
+            "-20px";
+
+        star.style.fontSize =
+            (12 + Math.random()*25) + "px";
+
+        star.style.color =
+            "#d889ff";
+
+        star.style.zIndex =
+            "9999";
+
+        star.style.transition =
+            "top 1.5s linear";
+
+        document.body.appendChild(star);
+
+
+        setTimeout(() => {
+
+            star.style.top =
+                "110%";
+
+        },50);
+
+
+        setTimeout(() => {
+
+            star.remove();
+
+        },1600);
+
+    }
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetRaid(){
+
+    hp = 100;
+
+    hits = 0;
+
+    totalDamage = 0;
+
+    phase = 1;
+
+    defeated = false;
+
+    startTime = null;
+
+
+    clearInterval(timerInterval);
+
+    clearInterval(attackInterval);
+
+
+    timerInterval = null;
+
+    attackInterval = null;
+
+
+    /* UI */
+
+    hpBar.style.width =
+        "100%";
+
+    hpBar.classList.remove(
+        "enrage"
+    );
+
+
+    hpText.textContent =
+        "100%";
+
+
+    hitsText.textContent =
+        "0";
+
+
+    damageText.textContent =
+        "0";
+
+
+    timerText.textContent =
+        "00:00";
+
+
+    statusText.textContent =
+        "ALIVE";
+
+
+    phaseText.textContent =
+        "PHASE 1";
+
+
+    phaseText.classList.remove(
+        "enrage"
+    );
+
+
+    phaseText.style.background =
+        "#321342";
+
+    phaseText.style.borderColor =
+        "#9b4dcc";
+
+
+    message.textContent =
+        "Dark sedang menunggu...";
+
+
+    reward.style.display =
+        "none";
+
+
+    boss.style.filter = "";
+
+
+    boss.classList.remove(
+        "hit",
+        "enrage"
+    );
+
+
+    boss.classList.add(
+        "idle"
+    );
+
+}
+
+</script>
+
 </body>
-</html>
+    </html>
