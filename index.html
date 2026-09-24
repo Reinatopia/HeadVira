@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>GTFS Dark Boss Raid</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gelitikin Vira</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     user-select:none;
@@ -15,489 +18,1120 @@ body{
     margin:0;
     min-height:100vh;
     overflow-x:hidden;
+
     font-family:Arial,sans-serif;
+
     color:white;
     text-align:center;
+
     background:
-        radial-gradient(circle at 50% 20%,#52127d,transparent 35%),
-        radial-gradient(circle at 20% 80%,#21072f,transparent 35%),
-        #07050d;
+        radial-gradient(
+            circle at 50% 15%,
+            #ff5fa2 0%,
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            #7d174b 0%,
+            transparent 35%
+        ),
+        #120711;
 }
+
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
     width:94%;
     max-width:900px;
+
     margin:auto;
-    padding:25px 0 50px;
+
+    padding:
+        25px
+        0
+        50px;
 }
+
+
+/* =========================
+   HEADER
+========================= */
 
 .logo{
     font-size:13px;
+
     letter-spacing:6px;
-    color:#dca7ff;
+
+    color:#ffb6d8;
+
     font-weight:bold;
 }
 
 h1{
-    margin:8px 0 4px;
-    font-size:clamp(32px,8vw,58px);
-    text-shadow:0 0 30px #a832ff;
+
+    margin:
+        8px
+        0
+        5px;
+
+    font-size:
+        clamp(
+            35px,
+            9vw,
+            62px
+        );
+
+    color:#ff9dca;
+
+    text-shadow:
+        0 0 10px #ff4d9d,
+        0 0 30px #ff1681,
+        0 0 60px #ff1681;
 }
 
 .subtitle{
-    color:#ad9ab9;
+
+    color:#e8b5cc;
+
     margin-top:0;
+
 }
 
-/* PANEL */
+
+/* =========================
+   PANEL
+========================= */
 
 .panel{
-    margin-top:20px;
+
+    margin-top:22px;
+
     padding:18px;
-    border-radius:25px;
-    border:1px solid #693b86;
-    background:rgba(12,7,20,.92);
-    box-shadow:0 0 70px rgba(140,40,210,.18);
+
+    border-radius:26px;
+
+    border:
+        1px solid
+        #ff4d9d;
+
+    background:
+        rgba(
+            25,
+            5,
+            17,
+            .93
+        );
+
+    box-shadow:
+        0 0 70px
+        rgba(
+            255,
+            55,
+            145,
+            .2
+        );
 }
 
-/* PHASE */
+
+/* =========================
+   PHASE
+========================= */
 
 .phase{
+
     display:inline-block;
-    padding:8px 18px;
+
+    padding:
+        8px
+        20px;
+
     border-radius:30px;
+
     font-size:12px;
+
     font-weight:bold;
+
     letter-spacing:2px;
-    background:#321342;
-    border:1px solid #9b4dcc;
+
+    color:#ffd2e7;
+
+    background:#521536;
+
+    border:
+        1px solid
+        #ff5da7;
+
     margin-bottom:15px;
+
+    transition:.3s;
 }
 
 .phase.enrage{
-    background:#5b101c;
-    border-color:#ff335d;
-    color:#ff9aac;
-    box-shadow:0 0 25px rgba(255,30,80,.5);
-    animation:enragePulse .6s infinite alternate;
+
+    color:white;
+
+    background:#780d28;
+
+    border-color:#ff315f;
+
+    box-shadow:
+        0 0 25px
+        rgba(
+            255,
+            30,
+            80,
+            .8
+        );
+
+    animation:
+        enragePulse
+        .5s
+        infinite
+        alternate;
 }
 
 @keyframes enragePulse{
-    to{
-        box-shadow:0 0 35px rgba(255,30,80,.9);
+
+    from{
+        transform:scale(1);
     }
+
+    to{
+        transform:scale(1.06);
+    }
+
 }
 
-/* STATS */
+
+/* =========================
+   STATS
+========================= */
 
 .stats{
+
     display:flex;
+
     justify-content:center;
-    gap:35px;
+
+    gap:32px;
+
     flex-wrap:wrap;
 }
 
 .stat b{
+
     display:block;
+
     font-size:25px;
+
+    color:#ffacd2;
 }
 
 .stat span{
+
     font-size:10px;
-    color:#93809d;
+
+    color:#a88799;
+
     letter-spacing:2px;
 }
 
-/* HP */
+
+/* =========================
+   HP
+========================= */
 
 .hp-container{
+
     max-width:720px;
-    margin:20px auto 10px;
+
+    margin:
+        20px
+        auto
+        10px;
 }
 
 .hp-info{
+
     display:flex;
+
     justify-content:space-between;
+
     margin-bottom:7px;
+
     font-size:12px;
-    color:#cbb9d4;
+
+    color:#e7bfd1;
 }
 
 .hp-bg{
+
     height:24px;
+
     border-radius:20px;
+
     overflow:hidden;
-    background:#140a1d;
-    border:1px solid #543066;
+
+    background:#1b0712;
+
+    border:
+        1px solid
+        #7e3157;
 }
 
 .hp{
+
     height:100%;
+
     width:100%;
-    background:linear-gradient(
-        90deg,
-        #6819a0,
-        #a832e8,
-        #e1a1ff
-    );
-    box-shadow:0 0 25px #a832ff;
-    transition:width .3s ease;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c21867,
+            #ff3d96,
+            #ffafd4
+        );
+
+    box-shadow:
+        0 0 25px
+        #ff3d96;
+
+    transition:
+        width
+        .3s
+        ease;
 }
 
 .hp.enrage{
-    background:linear-gradient(
-        90deg,
-        #9d101f,
-        #ff244f,
-        #ff8a9d
-    );
-    box-shadow:0 0 30px #ff244f;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8c0928,
+            #ff164e,
+            #ff718f
+        );
+
+    box-shadow:
+        0 0 30px
+        #ff164e;
 }
 
-/* ARENA */
+
+/* =========================
+   ARENA
+========================= */
 
 .arena{
+
     position:relative;
+
     height:510px;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     overflow:hidden;
 }
 
-/* MAGIC CIRCLE */
+
+/* =========================
+   MAGIC CIRCLE
+========================= */
 
 .magic{
+
     position:absolute;
+
     width:350px;
     height:350px;
+
     border-radius:50%;
-    border:2px solid rgba(181,68,255,.3);
+
+    border:
+        2px solid
+        rgba(
+            255,
+            90,
+            170,
+            .35
+        );
+
     box-shadow:
-        0 0 30px rgba(177,50,255,.4),
-        inset 0 0 50px rgba(177,50,255,.15);
-    animation:rotate 12s linear infinite;
+
+        0 0 35px
+        rgba(
+            255,
+            55,
+            160,
+            .5
+        ),
+
+        inset
+        0 0 50px
+        rgba(
+            255,
+            55,
+            160,
+            .15
+        );
+
+    animation:
+        rotate
+        12s
+        linear
+        infinite;
 }
 
-.magic:before,
-.magic:after{
+.magic:before{
+
     content:"";
+
     position:absolute;
+
     inset:35px;
+
     border-radius:50%;
-    border:1px dashed rgba(212,137,255,.4);
+
+    border:
+        1px dashed
+        rgba(
+            255,
+            170,
+            210,
+            .5
+        );
 }
 
 .magic:after{
+
+    content:"";
+
+    position:absolute;
+
     inset:75px;
-    border:2px solid rgba(193,82,255,.25);
+
+    border-radius:50%;
+
+    border:
+        2px solid
+        rgba(
+            255,
+            80,
+            170,
+            .3
+        );
 }
 
 @keyframes rotate{
-    from{transform:rotate(0)}
-    to{transform:rotate(360deg)}
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
 }
 
-/* BOSS */
+
+/* =========================
+   VIRA
+========================= */
 
 .boss{
+
     position:relative;
+
     z-index:3;
-    width:min(390px,82vw);
+
+    width:
+        min(
+            390px,
+            82vw
+        );
+
     max-height:470px;
+
     object-fit:contain;
+
     cursor:pointer;
-    filter:drop-shadow(0 0 28px rgba(188,65,255,.7));
-    transition:filter .2s;
+
+    filter:
+        drop-shadow(
+            0 0 28px
+            rgba(
+                255,
+                80,
+                170,
+                .75
+            )
+        );
+
+    transition:
+        filter
+        .2s;
 }
+
 
 /* IDLE */
 
 .boss.idle{
-    animation:idle 2.5s ease-in-out infinite;
+
+    animation:
+        idle
+        2.5s
+        ease-in-out
+        infinite;
 }
 
 @keyframes idle{
+
     0%,100%{
-        transform:translateY(0);
+        transform:
+            translateY(0);
     }
+
     50%{
-        transform:translateY(-10px);
+        transform:
+            translateY(-9px);
     }
+
 }
 
-/* HIT */
+
+/* =========================
+   KELITIKIN
+========================= */
 
 .boss.hit{
-    animation:none;
-    transform:scale(.9) rotate(-3deg);
+
+    animation:
+        tickle
+        .35s
+        ease-in-out;
+
     filter:
-        brightness(1.8)
-        drop-shadow(0 0 35px #d76aff);
+        brightness(1.35)
+        drop-shadow(
+            0 0 35px
+            #ff55a8
+        );
 }
+
+@keyframes tickle{
+
+    0%{
+        transform:
+            rotate(0)
+            scale(1);
+    }
+
+    15%{
+        transform:
+            rotate(-4deg)
+            scale(.97);
+    }
+
+    30%{
+        transform:
+            rotate(4deg)
+            scale(1.02);
+    }
+
+    45%{
+        transform:
+            rotate(-4deg)
+            scale(.98);
+    }
+
+    60%{
+        transform:
+            rotate(4deg)
+            scale(1.02);
+    }
+
+    75%{
+        transform:
+            rotate(-2deg)
+            scale(1);
+    }
+
+    100%{
+        transform:
+            rotate(0)
+            scale(1);
+    }
+
+}
+
 
 /* ENRAGE */
 
 .boss.enrage{
+
     filter:
         brightness(1.15)
-        saturate(1.5)
-        drop-shadow(0 0 35px #ff2457);
+        saturate(1.4)
+        drop-shadow(
+            0 0 35px
+            #ff2457
+        );
+
     animation:
-        enrageIdle .7s infinite alternate;
+        enrageIdle
+        .7s
+        infinite
+        alternate;
 }
 
 @keyframes enrageIdle{
+
     from{
-        transform:translateY(0) scale(1);
+        transform:
+            translateY(0)
+            scale(1);
     }
+
     to{
-        transform:translateY(-8px) scale(1.03);
+        transform:
+            translateY(-8px)
+            scale(1.03);
     }
+
 }
 
-/* SCREEN SHAKE */
+
+/* =========================
+   SCREEN SHAKE
+========================= */
 
 .shake{
-    animation:shake .25s;
+
+    animation:
+        shake
+        .25s;
 }
 
 @keyframes shake{
-    0%{transform:translate(0)}
-    25%{transform:translate(7px,-4px)}
-    50%{transform:translate(-7px,4px)}
-    75%{transform:translate(4px,3px)}
-    100%{transform:translate(0)}
+
+    0%{
+        transform:translate(0);
+    }
+
+    25%{
+        transform:
+            translate(
+                7px,
+                -4px
+            );
+    }
+
+    50%{
+        transform:
+            translate(
+                -7px,
+                4px
+            );
+    }
+
+    75%{
+        transform:
+            translate(
+                4px,
+                3px
+            );
+    }
+
+    100%{
+        transform:translate(0);
+    }
+
 }
 
-/* DAMAGE */
+
+/* =========================
+   DAMAGE
+========================= */
 
 .damage{
+
     position:absolute;
+
     z-index:10;
+
     pointer-events:none;
+
     font-size:26px;
+
     font-weight:900;
-    color:#e7b7ff;
-    text-shadow:0 0 12px #bd38ff;
-    animation:damageUp .8s forwards;
+
+    color:#ffb5d8;
+
+    text-shadow:
+        0 0 10px #ff2490,
+        0 0 20px #ff2490;
+
+    animation:
+        damageUp
+        .8s
+        forwards;
 }
 
 .damage.critical{
-    color:#fff;
+
+    color:white;
+
     font-size:34px;
+
     text-shadow:
-        0 0 10px #fff,
-        0 0 25px #ff38db;
+        0 0 10px white,
+        0 0 25px #ff38a2,
+        0 0 40px #ff0077;
 }
 
 @keyframes damageUp{
+
     from{
+
         opacity:1;
-        transform:translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
     }
+
     to{
+
         opacity:0;
-        transform:translateY(-90px) scale(1.2);
+
+        transform:
+            translateY(-90px)
+            scale(1.2);
     }
+
 }
 
-/* BOSS ATTACK */
+
+/* =========================
+   BOSS ATTACK
+========================= */
 
 .attack-warning{
+
     position:absolute;
+
     z-index:8;
+
     width:170px;
+
     height:170px;
+
     border-radius:50%;
-    border:4px solid #ff315d;
-    box-shadow:0 0 30px #ff1748;
-    animation:warning .8s forwards;
+
+    border:
+        4px solid
+        #ff315d;
+
+    box-shadow:
+        0 0 30px
+        #ff1748;
+
+    animation:
+        warning
+        .8s
+        forwards;
+
     pointer-events:none;
 }
 
 @keyframes warning{
+
     from{
+
         opacity:1;
-        transform:scale(.3);
+
+        transform:
+            scale(.3);
     }
+
     to{
+
         opacity:0;
-        transform:scale(1.5);
+
+        transform:
+            scale(1.5);
     }
+
 }
 
-/* MESSAGE */
+
+/* =========================
+   MESSAGE
+========================= */
 
 .message{
+
     min-height:25px;
-    margin:0 0 10px;
-    color:#c7b0d1;
+
+    margin:
+        0
+        0
+        10px;
+
+    color:#d5b4c5;
+
     font-size:13px;
 }
 
-/* BUTTON */
+
+/* =========================
+   BUTTON
+========================= */
 
 button{
+
     border:0;
+
     border-radius:14px;
-    padding:13px 25px;
+
+    padding:
+        13px
+        25px;
+
     color:white;
+
     font-weight:bold;
+
     cursor:pointer;
-    background:linear-gradient(135deg,#681aa0,#a936ee);
-    box-shadow:0 8px 25px rgba(150,50,230,.3);
+
+    background:
+        linear-gradient(
+            135deg,
+            #c51d70,
+            #ff3d99
+        );
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            255,
+            45,
+            145,
+            .3
+        );
 }
 
 button:hover{
-    filter:brightness(1.15);
+
+    filter:
+        brightness(1.15);
 }
 
 button:active{
-    transform:scale(.96);
+
+    transform:
+        scale(.96);
 }
 
-/* REWARD */
+
+/* =========================
+   REWARD
+========================= */
 
 .reward{
+
     display:none;
+
     margin-top:20px;
+
     padding:25px;
+
     border-radius:20px;
-    border:1px solid #b84cff;
-    background:rgba(100,25,140,.2);
-    animation:rewardIn .7s;
+
+    border:
+        1px solid
+        #ff4da1;
+
+    background:
+        rgba(
+            150,
+            25,
+            90,
+            .2
+        );
+
+    animation:
+        rewardIn
+        .7s;
 }
 
 @keyframes rewardIn{
+
     from{
+
         opacity:0;
-        transform:scale(.8);
+
+        transform:
+            scale(.8);
     }
+
     to{
+
         opacity:1;
-        transform:scale(1);
+
+        transform:
+            scale(1);
     }
+
 }
 
 .reward h2{
+
     font-size:30px;
+
+    color:#ffb1d5;
+
 }
 
 .code{
+
     margin:15px;
+
     font-size:28px;
+
     letter-spacing:5px;
+
     font-weight:bold;
-    color:#e4b2ff;
-    text-shadow:0 0 15px #b63cff;
+
+    color:#ffb5d8;
+
+    text-shadow:
+        0 0 15px
+        #ff3d99;
 }
 
+
+/* =========================
+   FOOTER
+========================= */
+
 footer{
+
     margin-top:20px;
-    color:#62566c;
+
+    color:#705565;
+
     font-size:11px;
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="container">
 
-    <div class="logo">GTFS EVENT</div>
+    <div class="logo">
+        GTFS EVENT
+    </div>
 
-    <h1>🌑 DARK BOSS RAID</h1>
+
+    <h1>
+        💗 Gelitikin Vira
+    </h1>
+
 
     <p class="subtitle">
-        Kalahkan Dark melalui 3 fase!
+        Klik Vira dan lihat reaksinya!
     </p>
+
 
     <div class="panel">
 
+
         <!-- PHASE -->
-        <div class="phase" id="phase">
+
+        <div
+            class="phase"
+            id="phase"
+        >
             PHASE 1
         </div>
 
+
         <!-- STATS -->
+
         <div class="stats">
 
-            <div class="stat">
-                <b id="hits">0</b>
-                <span>HITS</span>
-            </div>
 
             <div class="stat">
-                <b id="damage">0</b>
-                <span>DAMAGE</span>
+
+                <b id="hits">
+                    0
+                </b>
+
+                <span>
+                    TICKLES
+                </span>
+
             </div>
 
-            <div class="stat">
-                <b id="timer">00:00</b>
-                <span>TIME</span>
-            </div>
 
             <div class="stat">
-                <b id="status">ALIVE</b>
-                <span>STATUS</span>
+
+                <b id="damage">
+                    0
+                </b>
+
+                <span>
+                    SCORE
+                </span>
+
             </div>
+
+
+            <div class="stat">
+
+                <b id="timer">
+                    00:00
+                </b>
+
+                <span>
+                    TIME
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <b id="status">
+                    READY
+                </b>
+
+                <span>
+                    STATUS
+                </span>
+
+            </div>
+
 
         </div>
+
 
         <!-- HP -->
+
         <div class="hp-container">
 
+
             <div class="hp-info">
-                <span>🌑 DARK</span>
-                <span id="hpText">100%</span>
+
+                <span>
+                    💗 VIRA
+                </span>
+
+                <span id="hpText">
+                    100%
+                </span>
+
             </div>
+
 
             <div class="hp-bg">
-                <div class="hp" id="hp"></div>
+
+                <div
+                    class="hp"
+                    id="hp"
+                ></div>
+
             </div>
 
         </div>
 
+
         <!-- MESSAGE -->
-        <div class="message" id="message">
-            Dark sedang menunggu...
+
+        <div
+            class="message"
+            id="message"
+        >
+            Vira sedang menunggu...
         </div>
 
+
         <!-- ARENA -->
-        <div class="arena" id="arena">
+
+        <div
+            class="arena"
+            id="arena"
+        >
+
 
             <div class="magic"></div>
 
-            <!-- GAMBAR BOSS -->
+
+            <!--
+                FOTO NORMAL
+                dark1.png
+
+                FOTO KELITIKAN
+                dark2.png
+            -->
+
             <img
-                src="dark.png"
+                src="dark1.png"
+                data-normal="dark1.png"
+                data-tickle="dark2.png"
                 class="boss idle"
                 id="boss"
-                alt="Dark Boss"
+                alt="Vira"
             >
+
 
         </div>
 
+
         <p class="message">
-            ⚔️ TAP / CLICK DARK UNTUK MENYERANG
+
+            👆 TAP / CLICK VIRA UNTUK GELITIKIN
+
         </p>
 
-        <button onclick="resetRaid()">
-            🔄 RESET RAID
+
+        <button
+            onclick="resetRaid()"
+        >
+            🔄 RESET
         </button>
 
-        <!-- REWARD -->
-        <div class="reward" id="reward">
 
-            <h2>🎉 DARK DEFEATED!</h2>
+        <!-- REWARD -->
+
+        <div
+            class="reward"
+            id="reward"
+        >
+
+            <h2>
+                🎉 VIRA KALAH!
+            </h2>
 
             <p>
-                Kamu berhasil melewati semua phase!
+                Kamu berhasil menyelesaikan Gelitikin Vira!
             </p>
 
             <div class="code">
-                DARK2026
+                VIRA2026
             </div>
 
             <small>
@@ -506,28 +1140,37 @@ footer{
 
         </div>
 
+
     </div>
 
+
     <footer>
-        GTFS • Dark Boss Raid • Mini Event
+
+        GTFS • Gelitikin Vira • Mini Event
+
     </footer>
+
 
 </div>
 
 
 <script>
 
+
 /* =========================
    VARIABLES
 ========================= */
 
 let hp = 100;
+
 let hits = 0;
+
 let totalDamage = 0;
 
 let phase = 1;
 
 let startTime = null;
+
 let timerInterval = null;
 
 let attackInterval = null;
@@ -574,7 +1217,7 @@ const reward =
 
 
 /* =========================
-   START TIMER
+   TIMER
 ========================= */
 
 function startTimer(){
@@ -582,82 +1225,130 @@ function startTimer(){
     if(startTime !== null)
         return;
 
-    startTime = Date.now();
+
+    startTime =
+        Date.now();
+
 
     timerInterval =
         setInterval(() => {
 
+
             const seconds =
                 Math.floor(
-                    (Date.now() - startTime) / 1000
+                    (
+                        Date.now()
+                        -
+                        startTime
+                    ) / 1000
                 );
 
+
             const min =
-                String(Math.floor(seconds / 60))
-                .padStart(2,"0");
+                String(
+                    Math.floor(
+                        seconds / 60
+                    )
+                ).padStart(
+                    2,
+                    "0"
+                );
+
 
             const sec =
-                String(seconds % 60)
-                .padStart(2,"0");
+                String(
+                    seconds % 60
+                ).padStart(
+                    2,
+                    "0"
+                );
+
 
             timerText.textContent =
                 min + ":" + sec;
 
+
         },1000);
+
 }
 
 
 /* =========================
-   PLAYER ATTACK
+   CLICK / GELITIK
 ========================= */
 
-boss.addEventListener("click", attack);
+boss.addEventListener(
+    "click",
+    attack
+);
+
 
 function attack(event){
+
 
     if(defeated)
         return;
 
+
     startTimer();
 
-    /*
-       DAMAGE
-       Phase 1 : 5-10
-       Phase 2 : 7-14
-       Enrage : 10-20
-    */
+
+    /* DAMAGE */
 
     let minDamage = 5;
+
     let maxDamage = 10;
 
+
     if(phase === 2){
+
         minDamage = 7;
+
         maxDamage = 14;
+
     }
 
+
     if(phase === 3){
+
         minDamage = 10;
+
         maxDamage = 20;
+
     }
+
 
     let damage =
         Math.floor(
-            Math.random() *
-            (maxDamage - minDamage + 1)
-        ) + minDamage;
+            Math.random()
+            *
+            (
+                maxDamage
+                -
+                minDamage
+                +
+                1
+            )
+        )
+        +
+        minDamage;
 
 
-    /* CRITICAL HIT */
+    /* CRITICAL */
 
     const critical =
         Math.random() < 0.12;
 
+
     if(critical){
+
         damage *= 2;
+
     }
 
 
     hp -= damage;
+
 
     if(hp < 0)
         hp = 0;
@@ -668,50 +1359,98 @@ function attack(event){
     totalDamage += damage;
 
 
-    /* UPDATE */
+    /* UPDATE HP */
 
     hpBar.style.width =
         hp + "%";
 
+
     hpText.textContent =
         hp + "%";
 
+
     hitsText.textContent =
         hits;
+
 
     damageText.textContent =
         totalDamage;
 
 
-    /* HIT EFFECT */
+    /* =====================
+       GANTI FOTO
+    ===================== */
 
-    boss.classList.remove("idle");
+    boss.src =
+        boss.dataset.tickled ||
+        boss.dataset.tickle;
 
-    boss.classList.add("hit");
+
+    boss.classList.remove(
+        "idle",
+        "enrage"
+    );
+
+
+    boss.classList.add(
+        "hit"
+    );
+
+
+    /*
+       Foto 2 tampil
+       350ms.
+       Critical sedikit lebih lama.
+    */
 
     setTimeout(() => {
 
-        boss.classList.remove("hit");
 
         if(!defeated){
 
-            if(phase === 3)
-                boss.classList.add("enrage");
-            else
-                boss.classList.add("idle");
+            boss.src =
+                boss.dataset.normal;
+
+
+            boss.classList.remove(
+                "hit"
+            );
+
+
+            if(phase === 3){
+
+                boss.classList.add(
+                    "enrage"
+                );
+
+            }
+            else{
+
+                boss.classList.add(
+                    "idle"
+                );
+
+            }
 
         }
 
-    },120);
+
+    }, critical ? 500 : 350);
 
 
     /* SCREEN SHAKE */
 
-    document.body.classList.remove("shake");
+    document.body.classList.remove(
+        "shake"
+    );
+
 
     void document.body.offsetWidth;
 
-    document.body.classList.add("shake");
+
+    document.body.classList.add(
+        "shake"
+    );
 
 
     /* DAMAGE TEXT */
@@ -723,7 +1462,7 @@ function attack(event){
     );
 
 
-    /* CHECK PHASE */
+    /* PHASE */
 
     checkPhase();
 
@@ -740,7 +1479,7 @@ function attack(event){
 
 
 /* =========================
-   DAMAGE POPUP
+   DAMAGE TEXT
 ========================= */
 
 function createDamageText(
@@ -749,19 +1488,34 @@ function createDamageText(
     critical
 ){
 
+
     const popup =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     popup.className =
         "damage";
 
-    if(critical)
-        popup.classList.add("critical");
+
+    if(critical){
+
+        popup.classList.add(
+            "critical"
+        );
+
+    }
+
 
     popup.textContent =
         critical
-        ? "CRITICAL -" + damage
-        : "-" + damage;
+        ?
+        "💗 CRITICAL -"
+        + damage
+        :
+        "-"
+        + damage;
 
 
     const rect =
@@ -769,42 +1523,56 @@ function createDamageText(
 
 
     let x =
-        event.clientX - rect.left;
+        event.clientX
+        -
+        rect.left;
+
 
     let y =
-        event.clientY - rect.top;
+        event.clientY
+        -
+        rect.top;
 
 
-    x = Math.max(
-        20,
-        Math.min(
-            rect.width - 120,
-            x
-        )
-    );
+    x =
+        Math.max(
+            20,
+            Math.min(
+                rect.width - 140,
+                x
+            )
+        );
 
-    y = Math.max(
-        50,
-        Math.min(
-            rect.height - 80,
-            y
-        )
-    );
+
+    y =
+        Math.max(
+            50,
+            Math.min(
+                rect.height - 80,
+                y
+            )
+        );
 
 
     popup.style.left =
         x + "px";
 
+
     popup.style.top =
         y + "px";
 
 
-    arena.appendChild(popup);
+    arena.appendChild(
+        popup
+    );
 
 
     setTimeout(() => {
+
         popup.remove();
+
     },800);
+
 }
 
 
@@ -814,62 +1582,87 @@ function createDamageText(
 
 function checkPhase(){
 
+
     /*
-      PHASE 1
-      100% - 61%
+       PHASE 1
+       100 - 61
 
-      PHASE 2
-      60% - 21%
+       PHASE 2
+       60 - 21
 
-      ENRAGE
-      20% - 0%
+       ENRAGE
+       20 - 0
     */
 
 
-    if(hp <= 60 && hp > 20 && phase === 1){
+    if(
+        hp <= 60
+        &&
+        hp > 20
+        &&
+        phase === 1
+    ){
 
         phase = 2;
+
 
         phaseText.textContent =
             "⚡ PHASE 2";
 
+
         message.textContent =
-            "Dark mulai serius! Serangannya semakin kuat!";
+            "Vira mulai semakin sensitif!";
+
 
         phaseText.style.background =
-            "#45205c";
+            "#6a1c4a";
+
 
         phaseText.style.borderColor =
-            "#b852ff";
+            "#ff6bb2";
+
 
         startBossAttack();
 
     }
 
 
-    if(hp <= 20 && hp > 0 && phase === 2){
+        if(
+        hp <= 20
+        &&
+        hp > 0
+        &&
+        phase === 2
+    ){
 
         phase = 3;
 
         phaseText.textContent =
             "☠️ ENRAGE";
 
-        phaseText.classList.add("enrage");
+        phaseText.classList.add(
+            "enrage"
+        );
 
-        hpBar.classList.add("enrage");
+        hpBar.classList.add(
+            "enrage"
+        );
 
-        boss.classList.remove("idle");
+        boss.classList.remove(
+            "idle"
+        );
 
-        boss.classList.add("enrage");
-
-        message.textContent =
-            "☠️ DARK MEMASUKI ENRAGE MODE!";
+        boss.classList.add(
+            "enrage"
+        );
 
         statusText.textContent =
             "ENRAGED";
 
-        startBossAttack(true);
+        message.textContent =
+            "☠️ VIRA MEMASUKI ENRAGE!";
 
+        startBossAttack(true);
     }
 
 }
@@ -879,22 +1672,11 @@ function checkPhase(){
    BOSS ATTACK
 ========================= */
 
-function startBossAttack(enrage = false){
+function startBossAttack(enrage){
 
-    clearInterval(attackInterval);
-
-
-    /*
-       Phase 2:
-       setiap 4 detik
-
-       Enrage:
-       setiap 2 detik
-    */
-
-    const speed =
-        enrage ? 2000 : 4000;
-
+    clearInterval(
+        attackInterval
+    );
 
     attackInterval =
         setInterval(() => {
@@ -902,58 +1684,71 @@ function startBossAttack(enrage = false){
             if(defeated)
                 return;
 
-            bossAttack();
+            const warning =
+                document.createElement(
+                    "div"
+                );
 
-        },speed);
+            warning.className =
+                "attack-warning";
 
-}
+            warning.style.left =
+                (
+                    arena.clientWidth / 2
+                    -
+                    85
+                )
+                + "px";
 
+            warning.style.top =
+                (
+                    arena.clientHeight / 2
+                    -
+                    85
+                )
+                + "px";
 
-/* =========================
-   BOSS ATTACK EFFECT
-========================= */
+            arena.appendChild(
+                warning
+            );
 
-function bossAttack(){
-
-    const warning =
-        document.createElement("div");
-
-    warning.className =
-        "attack-warning";
-
-
-    const rect =
-        arena.getBoundingClientRect();
-
-
-    warning.style.left =
-        (rect.width / 2 - 85) + "px";
-
-    warning.style.top =
-        (rect.height / 2 - 85) + "px";
-
-
-    arena.appendChild(warning);
-
-
-    message.textContent =
-        "⚠️ DARK SEDANG MENYERANG!";
-
-
-    setTimeout(() => {
-
-        warning.remove();
-
-        if(!defeated){
 
             message.textContent =
-                phase === 3
-                ? "☠️ ENRAGE! Jangan berhenti menyerang!"
-                : "⚔️ Serang Dark!";
+                "⚠️ Vira sedang bereaksi!";
 
-        }
 
-    },800);
+            setTimeout(() => {
+
+                warning.remove();
+
+
+                if(!defeated){
+
+                    if(phase === 3){
+
+                        message.textContent =
+                            "☠️ ENRAGE! Gelitik terus!";
+
+                    }
+                    else{
+
+                        message.textContent =
+                            "👆 Gelitikin Vira!";
+
+                    }
+
+                }
+
+            },800);
+
+
+        },
+        enrage
+        ?
+        2000
+        :
+        4000
+    );
 
 }
 
@@ -966,26 +1761,22 @@ function defeatBoss(){
 
     defeated = true;
 
-    clearInterval(attackInterval);
 
-    clearInterval(timerInterval);
+    clearInterval(
+        attackInterval
+    );
 
-
-    hp = 0;
-
-    hpBar.style.width =
-        "0%";
-
-    hpText.textContent =
-        "0%";
+    clearInterval(
+        timerInterval
+    );
 
 
     statusText.textContent =
-        "DEFEATED";
+        "DONE";
 
 
     phaseText.textContent =
-        "👑 DEFEATED";
+        "👑 COMPLETE";
 
 
     phaseText.classList.remove(
@@ -993,73 +1784,20 @@ function defeatBoss(){
     );
 
 
-    boss.classList.remove(
-        "idle",
-        "enrage"
-    );
+    boss.src =
+        boss.dataset.normal;
 
 
-    boss.style.filter =
-        "grayscale(1) brightness(.45)";
+    boss.className =
+        "boss";
 
 
     message.textContent =
-        "🎉 Dark telah dikalahkan!";
+        "🎉 Kamu berhasil menggelitikin Vira!";
 
 
     reward.style.display =
         "block";
-
-
-    /* Confetti sederhana */
-
-    for(let i=0;i<30;i++){
-
-        const star =
-            document.createElement("div");
-
-        star.textContent =
-            "✦";
-
-        star.style.position =
-            "fixed";
-
-        star.style.left =
-            Math.random()*100 + "%";
-
-        star.style.top =
-            "-20px";
-
-        star.style.fontSize =
-            (12 + Math.random()*25) + "px";
-
-        star.style.color =
-            "#d889ff";
-
-        star.style.zIndex =
-            "9999";
-
-        star.style.transition =
-            "top 1.5s linear";
-
-        document.body.appendChild(star);
-
-
-        setTimeout(() => {
-
-            star.style.top =
-                "110%";
-
-        },50);
-
-
-        setTimeout(() => {
-
-            star.remove();
-
-        },1600);
-
-    }
 
 }
 
@@ -1083,9 +1821,13 @@ function resetRaid(){
     startTime = null;
 
 
-    clearInterval(timerInterval);
+    clearInterval(
+        timerInterval
+    );
 
-    clearInterval(attackInterval);
+    clearInterval(
+        attackInterval
+    );
 
 
     timerInterval = null;
@@ -1093,7 +1835,7 @@ function resetRaid(){
     attackInterval = null;
 
 
-    /* UI */
+    /* HP */
 
     hpBar.style.width =
         "100%";
@@ -1107,62 +1849,56 @@ function resetRaid(){
         "100%";
 
 
+    /* STATS */
+
     hitsText.textContent =
         "0";
-
 
     damageText.textContent =
         "0";
 
-
     timerText.textContent =
         "00:00";
 
-
     statusText.textContent =
-        "ALIVE";
+        "READY";
 
+
+    /* PHASE */
 
     phaseText.textContent =
         "PHASE 1";
-
 
     phaseText.classList.remove(
         "enrage"
     );
 
 
-    phaseText.style.background =
-        "#321342";
-
-    phaseText.style.borderColor =
-        "#9b4dcc";
-
+    /* MESSAGE */
 
     message.textContent =
-        "Dark sedang menunggu...";
+        "Vira sedang menunggu...";
 
+
+    /* FOTO */
+
+    boss.src =
+        boss.dataset.normal;
+
+
+    boss.className =
+        "boss idle";
+
+
+    /* REWARD */
 
     reward.style.display =
         "none";
-
-
-    boss.style.filter = "";
-
-
-    boss.classList.remove(
-        "hit",
-        "enrage"
-    );
-
-
-    boss.classList.add(
-        "idle"
-    );
 
 }
 
 </script>
 
 </body>
-    </html>
+
+</html>
